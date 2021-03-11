@@ -1,0 +1,118 @@
+image: docker:stable
+variables:
+  # TLS by default
+  DOCKER_TLS_CERTDIR: "/certs"
+  # overlay2 driver lessens load on host fs
+  DOCKER_DRIVER: overlay2
+  # varibales cant be passed to services :pensive:
+  DOCKER_REGISTRY_URL: "10.1.3.250:5000"
+  # Other variables can be added to Gitlabs CI Variables
+  # Or they can be defined in this file...
+  # more info on PORTAINER_HOOK here
+  # https://www.georg-ledermann.de/blog/2018/09/17/updating-docker-services-with-portainer-webhooks/
+
+  DOCKER_IMAGE_NAME: "test-kit-scanner"
+  # full name of docker image <registry>/<image>
+  IMAGE_NAME: ${DOCKER_REGISTRY_URL}/${DOCKER_IMAGE_NAME}
+
+stages:
+  - build
+  - deploy
+  - browser-test
+  - cleanup
+
+services:
+  - name: docker:19.03.1-dind
+    # URL would be ${DOCKER_REGISTRY_URL} except they are not visible here for some reason?
+    command: ["--insecure-registry", "10.1.3.250:5000"]
+    # also remember that gitlab-runner is using special dns settings to resolve dev.strac.org
+    # using /srv/gitlab-runner/config/config.toml on the dev host itself (not portainer)
+
+before_script:
+  - docker info
+  # docker:dind does not have curl preinstalled
+  - apk add --no-cache curl
+  - apk add openssh-client
+  - eval $(ssh-agent -s)
+  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+  - mkdir -p ~/.ssh
+  - chmod 700 ~/.ssh
+
+# Build docker image and upload to registry.
+build:
+  stage: build
+  script:
+    - apk add git
+    - docker build -t ${DOCKER_IMAGE_NAME} --build-arg arg_env=$CI_COMMIT_REF_SLUG --build-arg arg_sha=$CI_COMMIT_SHORT_SHA .
+    # FYI https://gitlab.com/gitlab-org/gitlab-foss/issues/48691
+    - docker tag ${DOCKER_IMAGE_NAME} $IMAGE_NAME:$CI_COMMIT_REF_SLUG
+    - docker push $IMAGE_NAME:$CI_COMMIT_REF_SLUG
+    #- curl -X POST $PORTAINER_HOOK
+
+testim:
+  stage: browser-test
+  image: docker:git
+  variables:
+    TESTIM_DOCKER: testim/docker-cli
+  services:
+    - docker:stable-dind
+  script:
+    - docker pull $TESTIM_DOCKER
+    - echo "{\"branchName\":\"$CI_COMMIT_REF_SLUG\"}" >param.json
+    - docker run --rm -v "$(pwd)":/opt/testim-runner $TESTIM_DOCKER --token "9H9bVXcmB8goMIm3OybZtQbx4U9MKFagxovamXEMRIbVo2HhO1" --project "MMNPG18vumpv6rZsPZea" --grid "Testim-Grid" --params-file /opt/testim-runner/param.json --name "ui2" -r /opt/testim-runner/testim-report.xml
+  artifacts:
+    paths:
+      - testim-report.xml
+    reports:
+      junit: testim-report.xml
+  except:
+    - master
+
+deploy master:
+  stage: deploy
+  script:
+    - curl -X POST http://10.1.3.250:9000/api/webhooks/760e16e6-e3fc-4163-bef9-5f870c0414e7
+    # Deploy to webservers
+    - ssh -o StrictHostKeyChecking=no root@10.75.30.211 "/usr/sbin/update_docker_image.sh ${DOCKER_IMAGE_NAME}:${CI_COMMIT_REF_SLUG} test-kit-scanner 443:8080"
+    - ssh -o StrictHostKeyChecking=no root@10.75.30.212 "/usr/sbin/update_docker_image.sh ${DOCKER_IMAGE_NAME}:${CI_COMMIT_REF_SLUG} test-kit-scanner 443:8080"
+    - ssh -o StrictHostKeyChecking=no root@10.75.30.214 "/usr/sbin/update_docker_image.sh ${DOCKER_IMAGE_NAME}:${CI_COMMIT_REF_SLUG} test-kit-scanner 443:8080"
+  only:
+    - master
+
+# Deploy to staging server for all branches.
+deploy_review:
+  stage: deploy
+  script:
+    - curl -X POST http://10.1.3.250:9000/api/webhooks/760e16e6-e3fc-4163-bef9-5f870c0414e7
+    # Deploy to staging server
+    - let RAND_PORT=$((8000 + RANDOM % 1000))
+    - ssh -o StrictHostKeyChecking=no root@10.75.30.213 "/usr/sbin/update_docker_image.sh ${DOCKER_IMAGE_NAME}:${CI_COMMIT_REF_SLUG} test-kit-scanner-${CI_COMMIT_REF_SLUG} ${RAND_PORT}:8080"
+  environment:
+    name: review/$CI_COMMIT_REF_SLUG
+    url: https://staging.txrapidtest.org/$CI_COMMIT_REF_SLUG/
+    on_stop: stop-review
+  only:
+    - branches
+  except:
+    - master
+
+# Stop the review staging container.
+stop-review:
+  stage: cleanup
+  script:
+    - ssh -o StrictHostKeyChecking=no root@10.75.30.213 "docker stop test-kit-scanner-${CI_COMMIT_REF_SLUG}"
+  when: manual
+  environment:
+    name: review/$CI_COMMIT_REF_SLUG
+    action: stop
+  only:
+    - branches
+  except:
+    - master
+
+deploy develop:
+  stage: deploy
+  script:
+    - curl -X POST http://10.1.3.250:9000/api/webhooks/f81b9022-ea12-42a5-954c-1d4bebb01cf7
+  only:
+    - develop

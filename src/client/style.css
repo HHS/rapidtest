@@ -1,0 +1,32 @@
+.vertical-center {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.horizontal-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.vertical-center.horizontal-center {
+  transform: translate(-50%,-50%);
+}
+
+html,#root {
+  background: rgba(208, 192, 204, 0.29);
+}
+
+.inner-overflow > div {
+  overflow: visible;
+}
+
+.version-footer {
+  text-align: center;
+  font-size: 50%;
+}
+
+.card {
+  border-radius: 0.75rem !important;
+}

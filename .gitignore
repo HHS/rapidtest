@@ -1,0 +1,8 @@
+node_modules
+dist
+*.log
+.idea
+tmp
+.env
+.env.site.*
+secrets.json

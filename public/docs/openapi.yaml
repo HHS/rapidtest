@@ -1,0 +1,419 @@
+openapi: 3.0.3
+info:
+  title: STRAC Rapid Testing App Documentation
+  description: ''
+  version: 1.0.0
+servers:
+  - url: 'https://app.warapidtest.org'
+paths:
+  /api/maintenance/v1/sites:
+    get:
+      summary: List sites.
+      description: ''
+      parameters:
+        - in: query
+          name: filter
+          description: Filter by keyword in site_name.
+          example: STR%C
+          required: false
+          schema:
+            type: string
+            description: Filter by keyword in site_name.
+            example: STR%C
+        - in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        - in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {}
+      tags:
+        - Site maintenance
+      security: []
+  /api/maintenance/v1/site:
+    post:
+      summary: Add site.
+      description: ''
+      parameters:
+        - in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        - in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: |-
+                  {
+                    "id": 1
+                  }
+                  Add a site.
+      tags:
+        - Site maintenance
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                county:
+                  type: string
+                  description: County of the test site.
+                  example: Bexar
+                state:
+                  type: string
+                  description: State of the test site.
+                  example: TX
+                site_type:
+                  type: string
+                  description: >-
+                    The type of site. Currently available: School, Government,
+                    Hospital.
+                  example: School
+                site_name:
+                  type: string
+                  description: Name of the test site.
+                  example: STRAC
+                street:
+                  type: string
+                  description: Street address of test site.
+                  example: '7500 US-90 #1'
+                city:
+                  type: string
+                  description: City of the test site.
+                  example: San Antonio
+                zip:
+                  type: integer
+                  description: ZIP of the test site.
+                  example: 78227
+                clia:
+                  type: string
+                  description: CLIA number that the test site is operating under.
+                  example: 45D2193699
+                contact_name:
+                  type: string
+                  description: Contact name for the test site manager.
+                  example: Fake Person
+                contact_phone:
+                  type: string
+                  description: Contact phone number for the test site manager.
+                  example: 999-999-9999
+                contact_email:
+                  type: string
+                  description: Contact email address for the test site manager.
+                  example: fake.person@strac.org
+                district:
+                  type: string
+                  description: Administrative district that the test site belongs to.
+                  example: Texas Division of Emergency Management
+                latitude:
+                  type: string
+                  description: Latitude of the test site.
+                  example: '29.400960'
+                longitude:
+                  type: string
+                  description: Longitude of the test site.
+                  example: '-98.638720'
+              required:
+                - county
+                - state
+                - site_type
+                - site_name
+                - street
+                - city
+                - zip
+                - clia
+        required: true
+      security: []
+  '/api/maintenance/v1/site/:id':
+    get:
+      summary: Get a site record.
+      description: ''
+      parameters:
+        - in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        - in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {}
+      tags:
+        - Site maintenance
+      security: []
+    patch:
+      summary: Update site.
+      description: ''
+      parameters:
+        - in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        - in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {}
+      tags:
+        - Site maintenance
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                county:
+                  type: string
+                  description: County of the test site.
+                  example: Bexar
+                state:
+                  type: string
+                  description: State of the test site.
+                  example: TX
+                site_type:
+                  type: string
+                  description: >-
+                    The type of site. Currently available: School, Government,
+                    Hospital.
+                  example: School
+                site_name:
+                  type: string
+                  description: Name of the test site.
+                  example: STRAC
+                street:
+                  type: string
+                  description: Street address of test site.
+                  example: '7500 US-90 #1'
+                city:
+                  type: string
+                  description: City of the test site.
+                  example: San Antonio
+                zip:
+                  type: integer
+                  description: ZIP of the test site.
+                  example: 78227
+                clia:
+                  type: string
+                  description: CLIA number that the test site is operating under.
+                  example: 45D2193699
+                contact_name:
+                  type: string
+                  description: Contact name for the test site manager.
+                  example: Fake Person
+                contact_phone:
+                  type: string
+                  description: Contact phone number for the test site manager.
+                  example: 999-999-9999
+                contact_email:
+                  type: string
+                  description: Contact email address for the test site manager.
+                  example: fake.person@strac.org
+                district:
+                  type: string
+                  description: Administrative district that the test site belongs to.
+                  example: Texas Division of Emergency Management
+                latitude:
+                  type: number
+                  description: Latitude of the test site.
+                  example: 29.40096
+                longitude:
+                  type: number
+                  description: Longitude of the test site.
+                  example: -98.63872
+                archive:
+                  type: boolean
+                  description: >-
+                    Archive status of test site (archive=true sites do not
+                    display to users).
+                  example: false
+        required: false
+      security: []
+  /api/maintenance/v1/proctors:
+    get:
+      summary: List proctors.
+      description: ''
+      parameters:
+        - in: query
+          name: filter
+          description: Filter by keyword in email_address.
+          example: '@strac.org'
+          required: false
+          schema:
+            type: string
+            description: Filter by keyword in email_address.
+            example: '@strac.org'
+        - in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        - in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {}
+      tags:
+        - Proctor maintenance
+      security: []
+  /api/maintenance/v1/proctor:
+    post:
+      summary: Add proctor.
+      description: ''
+      parameters:
+        - in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        - in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: |-
+                  {
+                    "id": 1
+                  }
+                  Add a proctor.
+      tags:
+        - Proctor maintenance
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                  description: First name of the test proctor.
+                  example: Fake
+                last_name:
+                  type: string
+                  description: Last name of the test proctor.
+                  example: Person
+                email_address:
+                  type: string
+                  description: Email address of the test proctor.
+                  example: fake.person@strac.org
+                phone_number_office:
+                  type: string
+                  description: 'Office phone number of the test proctor:'
+                  example: 999-999-9999
+              required:
+                - first_name
+                - last_name
+                - email_address
+        required: true
+      security: []
+  '/api/maintenance/v1/proctor/:id':
+    get:
+      summary: Get a proctor record.
+      description: ''
+      parameters:
+        - in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        - in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {}
+      tags:
+        - Proctor maintenance
+      security: []
+    patch:
+      summary: Update proctor account.
+      description: ''
+      parameters:
+        - in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        - in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {}
+      tags:
+        - Proctor maintenance
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                  description: First name of the test proctor.
+                  example: Fake
+                last_name:
+                  type: string
+                  description: Last name of the test proctor.
+                  example: Person
+                phone_number_office:
+                  type: string
+                  description: 'Office phone number of the test proctor:'
+                  example: 999-999-9999
+                archive:
+                  type: boolean
+                  description: >-
+                    Archive status of test proctor (archive=true users cannot
+                    log in).
+                  example: false
+                resend_email:
+                  type: boolean
+                  description: Set to "true" to re-send the proctor welcome email.
+                  example: true
+                password:
+                  type: string
+                  description: Set the user's password.
+                  example: maiores
+        required: false
+      security: []

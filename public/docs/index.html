@@ -1,0 +1,809 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>STRAC Rapid Testing App Documentation</title>
+
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css" media="screen" />
+    <link rel="stylesheet" href="css/print.css" media="print" />
+    <script src="js/all.js"></script>
+
+    <link rel="stylesheet" href="css/highlight-darcula.css" media="" />
+    <script src="js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+</head>
+
+<body class="" data-languages="[&#34;javascript&#34;,&#34;bash&#34;]">
+<a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" alt="-image" class=""/>
+      </span>
+</a>
+<div class="tocify-wrapper">
+    
+    
+        <div class="lang-selector">
+            
+                <a href="#" data-language-name="javascript">javascript</a>
+            
+                <a href="#" data-language-name="bash">bash</a>
+            
+        </div>
+    
+    <div class="search">
+        <input type="text" class="search" id="input-search" placeholder="Search">
+    </div>
+    <ul class="search-results"></ul>
+
+    <ul id="toc">
+    </ul>
+
+    
+        <ul class="toc-footer" id="toc-footer">
+            
+                <li><a href="collection.json">View Postman Collection</a></li>
+            
+                <li><a href="openapi.yaml">View OpenAPI Spec</a></li>
+            
+                <li><a href='http://github.com/knuckleswtf/scribe'>Documentation powered by Scribe ✍</a></li>
+            
+        </ul>
+    
+        <ul class="toc-footer" id="last-updated">
+            <li>Last updated: February 24, 2021</li>
+        </ul>
+</div>
+<div class="page-wrapper">
+    <div class="dark-box"></div>
+    <div class="content">
+        <h1 id="introduction">Introduction</h1>
+<p>This documentation aims to provide all the information you need to work with our API.</p>
+<aside>As you scroll, you'll see code examples for working with the API in different programming languages in the dark area to the right (or as part of the content on mobile).
+You can switch the language used with the tabs at the top right (or from the nav menu at the top left on mobile).</aside>
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
+<script>
+    var baseUrl = "https://app.warapidtest.org";
+</script>
+<script src="js/tryitout-1.2.0.js"></script>
+<blockquote>
+  <p>Base URL:</p>
+</blockquote>
+<pre><code class="yaml language-yaml">https://app.warapidtest.org
+</code></pre><h1 id="authenticatingrequests">Authenticating requests</h1>
+<p>This API is not authenticated.</p><h1 id="proctormaintenance">Proctor maintenance</h1>
+<h2 id="listproctors">List proctors.</h2>
+<blockquote>
+  <p>Example request:</p>
+</blockquote>
+<pre><code class="javascript language-javascript">const url = new URL(
+    "https://app.warapidtest.org/api/maintenance/v1/proctors"
+);
+
+let params = {{
+    "filter": "@strac.org",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+.then(response =&gt; response.json())
+.then(json =&gt; console.log(json));
+</code></pre>
+<pre><code class="bash language-bash">curl -X GET \
+    -G "https://app.warapidtest.org/api/maintenance/v1/proctors" 
+</code></pre>
+<div id="execution-results-GET-api-maintenance-v1-proctors" hidden>
+    <blockquote>Received response<span id="execution-response-status-GET-api-maintenance-v1-proctors"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-GET-api-maintenance-v1-proctors"></code></pre>
+</div>
+<div id="execution-error-GET-api-maintenance-v1-proctors" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GET-api-maintenance-v1-proctors"></code></pre>
+</div>
+<form id="form-GET-api-maintenance-v1-proctors" data-method="GET" data-path="/api/maintenance/v1/proctors" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application/json","Accept":"application/json"}' onsubmit="event.preventDefault(); executeTryOut('GET-api-maintenance-v1-proctors', this);">
+<h3>
+    Request
+    <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-GET-api-maintenance-v1-proctors" onclick="tryItOut('GET-api-maintenance-v1-proctors');">Try it out ⚡</button>
+    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-GET-api-maintenance-v1-proctors" onclick="cancelTryOut('GET-api-maintenance-v1-proctors');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-GET-api-maintenance-v1-proctors" hidden>Send Request 💥</button>
+</h3>
+<p>
+<small class="badge badge-green">GET</small>
+ <b><code>/api/maintenance/v1/proctors</b></code>
+</p>
+<h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+<p>
+<b><code>filter</code></b>&nbsp;&nbsp;<small>string</small> 
+    <i>optional</i>
+<input type="text" name="filter" data-endpoint="GET-api-maintenance-v1-proctors" data-component="query" hidden>
+<br>
+Filter by keyword in email_address.</p>
+</form>
+<h2 id="addproctor">Add proctor.</h2>
+<blockquote>
+  <p>Example request:</p>
+</blockquote>
+<pre><code class="javascript language-javascript">const url = new URL(
+    "https://app.warapidtest.org/api/maintenance/v1/proctor"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "first_name": "Fake",
+    "last_name": "Person",
+    "email_address": "fake.person@strac.org",
+    "phone_number_office": "999-999-9999"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify(body),
+})
+.then(response =&gt; response.json())
+.then(json =&gt; console.log(json));
+</code></pre>
+<pre><code class="bash language-bash">curl -X POST \
+    "https://app.warapidtest.org/api/maintenance/v1/proctor"  \
+    -d '{"first_name":"Fake","last_name":"Person","email_address":"fake.person@strac.org","phone_number_office":"999-999-9999"}'
+</code></pre>
+<blockquote>
+  <p>Example response (200):</p>
+</blockquote>
+<pre><code class="json language-json">{
+  "id": 1
+}
+Add a proctor.
+</code></pre>
+<div id="execution-results-POST-api-maintenance-v1-proctor" hidden>
+    <blockquote>Received response<span id="execution-response-status-POST-api-maintenance-v1-proctor"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-POST-api-maintenance-v1-proctor"></code></pre>
+</div>
+<div id="execution-error-POST-api-maintenance-v1-proctor" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POST-api-maintenance-v1-proctor"></code></pre>
+</div>
+<form id="form-POST-api-maintenance-v1-proctor" data-method="POST" data-path="/api/maintenance/v1/proctor" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application/json","Accept":"application/json"}' onsubmit="event.preventDefault(); executeTryOut('POST-api-maintenance-v1-proctor', this);">
+<h3>
+    Request
+    <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-POST-api-maintenance-v1-proctor" onclick="tryItOut('POST-api-maintenance-v1-proctor');">Try it out ⚡</button>
+    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-POST-api-maintenance-v1-proctor" onclick="cancelTryOut('POST-api-maintenance-v1-proctor');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-POST-api-maintenance-v1-proctor" hidden>Send Request 💥</button>
+</h3>
+<p>
+<small class="badge badge-black">POST</small>
+ <b><code>/api/maintenance/v1/proctor</b></code>
+</p>
+<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+
+<p>
+<b><code>first_name</code></b>&nbsp;&nbsp;<small>string</small> 
+<input type="text" name="first_name" data-endpoint="POST-api-maintenance-v1-proctor" data-component="body" required hidden>
+<br>
+First name of the test proctor.</p>
+<p>
+<b><code>last_name</code></b>&nbsp;&nbsp;<small>string</small> 
+<input type="text" name="last_name" data-endpoint="POST-api-maintenance-v1-proctor" data-component="body" required hidden>
+<br>
+Last name of the test proctor.</p>
+<p>
+<b><code>email_address</code></b>&nbsp;&nbsp;<small>string</small> 
+<input type="text" name="email_address" data-endpoint="POST-api-maintenance-v1-proctor" data-component="body" required hidden>
+<br>
+Email address of the test proctor.</p>
+<p>
+<b><code>phone_number_office</code></b>&nbsp;&nbsp;<small>string</small> 
+    <i>optional</i>
+<input type="text" name="phone_number_office" data-endpoint="POST-api-maintenance-v1-proctor" data-component="body" hidden>
+<br>
+Office phone number of the test proctor:</p>
+</form>
+<h2 id="getaproctorrecord">Get a proctor record.</h2>
+<blockquote>
+  <p>Example request:</p>
+</blockquote>
+<pre><code class="javascript language-javascript">const url = new URL(
+    "https://app.warapidtest.org/api/maintenance/v1/proctor/exercitationem"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+.then(response =&gt; response.json())
+.then(json =&gt; console.log(json));
+</code></pre>
+<pre><code class="bash language-bash">curl -X GET \
+    -G "https://app.warapidtest.org/api/maintenance/v1/proctor/exercitationem" 
+</code></pre>
+<div id="execution-results-GET-api-maintenance-v1-proctor--id" hidden>
+    <blockquote>Received response<span id="execution-response-status-GET-api-maintenance-v1-proctor--id"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-GET-api-maintenance-v1-proctor--id"></code></pre>
+</div>
+<div id="execution-error-GET-api-maintenance-v1-proctor--id" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GET-api-maintenance-v1-proctor--id"></code></pre>
+</div>
+<form id="form-GET-api-maintenance-v1-proctor--id" data-method="GET" data-path="/api/maintenance/v1/proctor/:id" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application/json","Accept":"application/json"}' onsubmit="event.preventDefault(); executeTryOut('GET-api-maintenance-v1-proctor--id', this);">
+<h3>
+    Request
+    <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-GET-api-maintenance-v1-proctor--id" onclick="tryItOut('GET-api-maintenance-v1-proctor--id');">Try it out ⚡</button>
+    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-GET-api-maintenance-v1-proctor--id" onclick="cancelTryOut('GET-api-maintenance-v1-proctor--id');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-GET-api-maintenance-v1-proctor--id" hidden>Send Request 💥</button>
+</h3>
+<p>
+<small class="badge badge-green">GET</small>
+ <b><code>/api/maintenance/v1/proctor/:id</b></code>
+</p>
+<h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+<p>
+<b><code>id</code></b>&nbsp;&nbsp;<small>string</small> 
+<input type="text" name="id" data-endpoint="GET-api-maintenance-v1-proctor--id" data-component="url" required hidden>
+<br>
+</p>
+</form>
+<h2 id="updateproctoraccount">Update proctor account.</h2>
+<blockquote>
+  <p>Example request:</p>
+</blockquote>
+<pre><code class="javascript language-javascript">const url = new URL(
+    "https://app.warapidtest.org/api/maintenance/v1/proctor/cupiditate"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "first_name": "Fake",
+    "last_name": "Person",
+    "phone_number_office": "999-999-9999",
+    "archive": false,
+    "resend_email": true,
+    "password": "maiores"
+}
+
+fetch(url, {
+    method: "PATCH",
+    headers: headers,
+    body: JSON.stringify(body),
+})
+.then(response =&gt; response.json())
+.then(json =&gt; console.log(json));
+</code></pre>
+<pre><code class="bash language-bash">curl -X PATCH \
+    "https://app.warapidtest.org/api/maintenance/v1/proctor/cupiditate"  \
+    -d '{"first_name":"Fake","last_name":"Person","phone_number_office":"999-999-9999","archive":false,"resend_email":true,"password":"maiores"}'
+</code></pre>
+<div id="execution-results-PATCH-api-maintenance-v1-proctor--id" hidden>
+    <blockquote>Received response<span id="execution-response-status-PATCH-api-maintenance-v1-proctor--id"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-PATCH-api-maintenance-v1-proctor--id"></code></pre>
+</div>
+<div id="execution-error-PATCH-api-maintenance-v1-proctor--id" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PATCH-api-maintenance-v1-proctor--id"></code></pre>
+</div>
+<form id="form-PATCH-api-maintenance-v1-proctor--id" data-method="PATCH" data-path="/api/maintenance/v1/proctor/:id" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application/json","Accept":"application/json"}' onsubmit="event.preventDefault(); executeTryOut('PATCH-api-maintenance-v1-proctor--id', this);">
+<h3>
+    Request
+    <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-PATCH-api-maintenance-v1-proctor--id" onclick="tryItOut('PATCH-api-maintenance-v1-proctor--id');">Try it out ⚡</button>
+    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-PATCH-api-maintenance-v1-proctor--id" onclick="cancelTryOut('PATCH-api-maintenance-v1-proctor--id');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-PATCH-api-maintenance-v1-proctor--id" hidden>Send Request 💥</button>
+</h3>
+<p>
+<small class="badge badge-purple">PATCH</small>
+ <b><code>/api/maintenance/v1/proctor/:id</b></code>
+</p>
+<h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+<p>
+<b><code>id</code></b>&nbsp;&nbsp;<small>string</small> 
+<input type="text" name="id" data-endpoint="PATCH-api-maintenance-v1-proctor--id" data-component="url" required hidden>
+<br>
+</p>
+<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+
+<p>
+<b><code>first_name</code></b>&nbsp;&nbsp;<small>string</small> 
+    <i>optional</i>
+<input type="text" name="first_name" data-endpoint="PATCH-api-maintenance-v1-proctor--id" data-component="body" hidden>
+<br>
+First name of the test proctor.</p>
+<p>
+<b><code>last_name</code></b>&nbsp;&nbsp;<small>string</small> 
+    <i>optional</i>
+<input type="text" name="last_name" data-endpoint="PATCH-api-maintenance-v1-proctor--id" data-component="body" hidden>
+<br>
+Last name of the test proctor.</p>
+<p>
+<b><code>phone_number_office</code></b>&nbsp;&nbsp;<small>string</small> 
+    <i>optional</i>
+<input type="text" name="phone_number_office" data-endpoint="PATCH-api-maintenance-v1-proctor--id" data-component="body" hidden>
+<br>
+Office phone number of the test proctor:</p>
+<p>
+<b><code>archive</code></b>&nbsp;&nbsp;<small>boolean</small> 
+    <i>optional</i>
+    <label data-endpoint="PATCH-api-maintenance-v1-proctor--id" hidden><input type="radio" name="archive" value="true" data-endpoint="PATCH-api-maintenance-v1-proctor--id" data-component="body" ><code>true</code></label>
+<label data-endpoint="PATCH-api-maintenance-v1-proctor--id" hidden><input type="radio" name="archive" value="false" data-endpoint="PATCH-api-maintenance-v1-proctor--id" data-component="body" ><code>false</code></label>
+<br>
+Archive status of test proctor (archive=true users cannot log in).</p>
+<p>
+<b><code>resend_email</code></b>&nbsp;&nbsp;<small>boolean</small> 
+    <i>optional</i>
+    <label data-endpoint="PATCH-api-maintenance-v1-proctor--id" hidden><input type="radio" name="resend_email" value="true" data-endpoint="PATCH-api-maintenance-v1-proctor--id" data-component="body" ><code>true</code></label>
+<label data-endpoint="PATCH-api-maintenance-v1-proctor--id" hidden><input type="radio" name="resend_email" value="false" data-endpoint="PATCH-api-maintenance-v1-proctor--id" data-component="body" ><code>false</code></label>
+<br>
+Set to "true" to re-send the proctor welcome email.</p>
+<p>
+<b><code>password</code></b>&nbsp;&nbsp;<small>string</small> 
+    <i>optional</i>
+<input type="text" name="password" data-endpoint="PATCH-api-maintenance-v1-proctor--id" data-component="body" hidden>
+<br>
+Set the user's password.</p>
+</form><h1 id="sitemaintenance">Site maintenance</h1>
+<h2 id="listsites">List sites.</h2>
+<blockquote>
+  <p>Example request:</p>
+</blockquote>
+<pre><code class="javascript language-javascript">const url = new URL(
+    "https://app.warapidtest.org/api/maintenance/v1/sites"
+);
+
+let params = {{
+    "filter": "STR%C",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+.then(response =&gt; response.json())
+.then(json =&gt; console.log(json));
+</code></pre>
+<pre><code class="bash language-bash">curl -X GET \
+    -G "https://app.warapidtest.org/api/maintenance/v1/sites" 
+</code></pre>
+<div id="execution-results-GET-api-maintenance-v1-sites" hidden>
+    <blockquote>Received response<span id="execution-response-status-GET-api-maintenance-v1-sites"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-GET-api-maintenance-v1-sites"></code></pre>
+</div>
+<div id="execution-error-GET-api-maintenance-v1-sites" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GET-api-maintenance-v1-sites"></code></pre>
+</div>
+<form id="form-GET-api-maintenance-v1-sites" data-method="GET" data-path="/api/maintenance/v1/sites" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application/json","Accept":"application/json"}' onsubmit="event.preventDefault(); executeTryOut('GET-api-maintenance-v1-sites', this);">
+<h3>
+    Request
+    <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-GET-api-maintenance-v1-sites" onclick="tryItOut('GET-api-maintenance-v1-sites');">Try it out ⚡</button>
+    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-GET-api-maintenance-v1-sites" onclick="cancelTryOut('GET-api-maintenance-v1-sites');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-GET-api-maintenance-v1-sites" hidden>Send Request 💥</button>
+</h3>
+<p>
+<small class="badge badge-green">GET</small>
+ <b><code>/api/maintenance/v1/sites</b></code>
+</p>
+<h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+<p>
+<b><code>filter</code></b>&nbsp;&nbsp;<small>string</small> 
+    <i>optional</i>
+<input type="text" name="filter" data-endpoint="GET-api-maintenance-v1-sites" data-component="query" hidden>
+<br>
+Filter by keyword in site_name.</p>
+</form>
+<h2 id="addsite">Add site.</h2>
+<blockquote>
+  <p>Example request:</p>
+</blockquote>
+<pre><code class="javascript language-javascript">const url = new URL(
+    "https://app.warapidtest.org/api/maintenance/v1/site"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "county": "Bexar",
+    "state": "TX",
+    "site_type": "School",
+    "site_name": "STRAC",
+    "street": "7500 US-90 #1",
+    "city": "San Antonio",
+    "zip": 78227,
+    "clia": "45D2193699",
+    "contact_name": "Fake Person",
+    "contact_phone": "999-999-9999",
+    "contact_email": "fake.person@strac.org",
+    "district": "Texas Division of Emergency Management",
+    "latitude": "29.400960",
+    "longitude": "-98.638720"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify(body),
+})
+.then(response =&gt; response.json())
+.then(json =&gt; console.log(json));
+</code></pre>
+<pre><code class="bash language-bash">curl -X POST \
+    "https://app.warapidtest.org/api/maintenance/v1/site"  \
+    -d '{"county":"Bexar","state":"TX","site_type":"School","site_name":"STRAC","street":"7500 US-90 #1","city":"San Antonio","zip":78227,"clia":"45D2193699","contact_name":"Fake Person","contact_phone":"999-999-9999","contact_email":"fake.person@strac.org","district":"Texas Division of Emergency Management","latitude":"29.400960","longitude":"-98.638720"}'
+</code></pre>
+<blockquote>
+  <p>Example response (200):</p>
+</blockquote>
+<pre><code class="json language-json">{
+  "id": 1
+}
+Add a site.
+</code></pre>
+<div id="execution-results-POST-api-maintenance-v1-site" hidden>
+    <blockquote>Received response<span id="execution-response-status-POST-api-maintenance-v1-site"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-POST-api-maintenance-v1-site"></code></pre>
+</div>
+<div id="execution-error-POST-api-maintenance-v1-site" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POST-api-maintenance-v1-site"></code></pre>
+</div>
+<form id="form-POST-api-maintenance-v1-site" data-method="POST" data-path="/api/maintenance/v1/site" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application/json","Accept":"application/json"}' onsubmit="event.preventDefault(); executeTryOut('POST-api-maintenance-v1-site', this);">
+<h3>
+    Request
+    <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-POST-api-maintenance-v1-site" onclick="tryItOut('POST-api-maintenance-v1-site');">Try it out ⚡</button>
+    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-POST-api-maintenance-v1-site" onclick="cancelTryOut('POST-api-maintenance-v1-site');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-POST-api-maintenance-v1-site" hidden>Send Request 💥</button>
+</h3>
+<p>
+<small class="badge badge-black">POST</small>
+ <b><code>/api/maintenance/v1/site</b></code>
+</p>
+<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+
+<p>
+<b><code>county</code></b>&nbsp;&nbsp;<small>string</small> 
+<input type="text" name="county" data-endpoint="POST-api-maintenance-v1-site" data-component="body" required hidden>
+<br>
+County of the test site.</p>
+<p>
+<b><code>state</code></b>&nbsp;&nbsp;<small>string</small> 
+<input type="text" name="state" data-endpoint="POST-api-maintenance-v1-site" data-component="body" required hidden>
+<br>
+State of the test site.</p>
+<p>
+<b><code>site_type</code></b>&nbsp;&nbsp;<small>string</small> 
+<input type="text" name="site_type" data-endpoint="POST-api-maintenance-v1-site" data-component="body" required hidden>
+<br>
+The type of site. Currently available: School, Government, Hospital.</p>
+<p>
+<b><code>site_name</code></b>&nbsp;&nbsp;<small>string</small> 
+<input type="text" name="site_name" data-endpoint="POST-api-maintenance-v1-site" data-component="body" required hidden>
+<br>
+Name of the test site.</p>
+<p>
+<b><code>street</code></b>&nbsp;&nbsp;<small>string</small> 
+<input type="text" name="street" data-endpoint="POST-api-maintenance-v1-site" data-component="body" required hidden>
+<br>
+Street address of test site.</p>
+<p>
+<b><code>city</code></b>&nbsp;&nbsp;<small>string</small> 
+<input type="text" name="city" data-endpoint="POST-api-maintenance-v1-site" data-component="body" required hidden>
+<br>
+City of the test site.</p>
+<p>
+<b><code>zip</code></b>&nbsp;&nbsp;<small>integer</small> 
+<input type="number" name="zip" data-endpoint="POST-api-maintenance-v1-site" data-component="body" required hidden>
+<br>
+ZIP of the test site.</p>
+<p>
+<b><code>clia</code></b>&nbsp;&nbsp;<small>string</small> 
+<input type="text" name="clia" data-endpoint="POST-api-maintenance-v1-site" data-component="body" required hidden>
+<br>
+CLIA number that the test site is operating under.</p>
+<p>
+<b><code>contact_name</code></b>&nbsp;&nbsp;<small>string</small> 
+    <i>optional</i>
+<input type="text" name="contact_name" data-endpoint="POST-api-maintenance-v1-site" data-component="body" hidden>
+<br>
+Contact name for the test site manager.</p>
+<p>
+<b><code>contact_phone</code></b>&nbsp;&nbsp;<small>string</small> 
+    <i>optional</i>
+<input type="text" name="contact_phone" data-endpoint="POST-api-maintenance-v1-site" data-component="body" hidden>
+<br>
+Contact phone number for the test site manager.</p>
+<p>
+<b><code>contact_email</code></b>&nbsp;&nbsp;<small>string</small> 
+    <i>optional</i>
+<input type="text" name="contact_email" data-endpoint="POST-api-maintenance-v1-site" data-component="body" hidden>
+<br>
+Contact email address for the test site manager.</p>
+<p>
+<b><code>district</code></b>&nbsp;&nbsp;<small>string</small> 
+    <i>optional</i>
+<input type="text" name="district" data-endpoint="POST-api-maintenance-v1-site" data-component="body" hidden>
+<br>
+Administrative district that the test site belongs to.</p>
+<p>
+<b><code>latitude</code></b>&nbsp;&nbsp;<small>string</small> 
+    <i>optional</i>
+<input type="text" name="latitude" data-endpoint="POST-api-maintenance-v1-site" data-component="body" hidden>
+<br>
+Latitude of the test site.</p>
+<p>
+<b><code>longitude</code></b>&nbsp;&nbsp;<small>string</small> 
+    <i>optional</i>
+<input type="text" name="longitude" data-endpoint="POST-api-maintenance-v1-site" data-component="body" hidden>
+<br>
+Longitude of the test site.</p>
+</form>
+<h2 id="getasiterecord">Get a site record.</h2>
+<blockquote>
+  <p>Example request:</p>
+</blockquote>
+<pre><code class="javascript language-javascript">const url = new URL(
+    "https://app.warapidtest.org/api/maintenance/v1/site/porro"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+.then(response =&gt; response.json())
+.then(json =&gt; console.log(json));
+</code></pre>
+<pre><code class="bash language-bash">curl -X GET \
+    -G "https://app.warapidtest.org/api/maintenance/v1/site/porro" 
+</code></pre>
+<div id="execution-results-GET-api-maintenance-v1-site--id" hidden>
+    <blockquote>Received response<span id="execution-response-status-GET-api-maintenance-v1-site--id"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-GET-api-maintenance-v1-site--id"></code></pre>
+</div>
+<div id="execution-error-GET-api-maintenance-v1-site--id" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GET-api-maintenance-v1-site--id"></code></pre>
+</div>
+<form id="form-GET-api-maintenance-v1-site--id" data-method="GET" data-path="/api/maintenance/v1/site/:id" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application/json","Accept":"application/json"}' onsubmit="event.preventDefault(); executeTryOut('GET-api-maintenance-v1-site--id', this);">
+<h3>
+    Request
+    <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-GET-api-maintenance-v1-site--id" onclick="tryItOut('GET-api-maintenance-v1-site--id');">Try it out ⚡</button>
+    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-GET-api-maintenance-v1-site--id" onclick="cancelTryOut('GET-api-maintenance-v1-site--id');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-GET-api-maintenance-v1-site--id" hidden>Send Request 💥</button>
+</h3>
+<p>
+<small class="badge badge-green">GET</small>
+ <b><code>/api/maintenance/v1/site/:id</b></code>
+</p>
+<h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+<p>
+<b><code>id</code></b>&nbsp;&nbsp;<small>string</small> 
+<input type="text" name="id" data-endpoint="GET-api-maintenance-v1-site--id" data-component="url" required hidden>
+<br>
+</p>
+</form>
+<h2 id="updatesite">Update site.</h2>
+<blockquote>
+  <p>Example request:</p>
+</blockquote>
+<pre><code class="javascript language-javascript">const url = new URL(
+    "https://app.warapidtest.org/api/maintenance/v1/site/ut"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "county": "Bexar",
+    "state": "TX",
+    "site_type": "School",
+    "site_name": "STRAC",
+    "street": "7500 US-90 #1",
+    "city": "San Antonio",
+    "zip": 78227,
+    "clia": "45D2193699",
+    "contact_name": "Fake Person",
+    "contact_phone": "999-999-9999",
+    "contact_email": "fake.person@strac.org",
+    "district": "Texas Division of Emergency Management",
+    "latitude": 29.40096,
+    "longitude": -98.63872,
+    "archive": false
+}
+
+fetch(url, {
+    method: "PATCH",
+    headers: headers,
+    body: JSON.stringify(body),
+})
+.then(response =&gt; response.json())
+.then(json =&gt; console.log(json));
+</code></pre>
+<pre><code class="bash language-bash">curl -X PATCH \
+    "https://app.warapidtest.org/api/maintenance/v1/site/ut"  \
+    -d '{"county":"Bexar","state":"TX","site_type":"School","site_name":"STRAC","street":"7500 US-90 #1","city":"San Antonio","zip":78227,"clia":"45D2193699","contact_name":"Fake Person","contact_phone":"999-999-9999","contact_email":"fake.person@strac.org","district":"Texas Division of Emergency Management","latitude":29.40096,"longitude":-98.63872,"archive":false}'
+</code></pre>
+<div id="execution-results-PATCH-api-maintenance-v1-site--id" hidden>
+    <blockquote>Received response<span id="execution-response-status-PATCH-api-maintenance-v1-site--id"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-PATCH-api-maintenance-v1-site--id"></code></pre>
+</div>
+<div id="execution-error-PATCH-api-maintenance-v1-site--id" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PATCH-api-maintenance-v1-site--id"></code></pre>
+</div>
+<form id="form-PATCH-api-maintenance-v1-site--id" data-method="PATCH" data-path="/api/maintenance/v1/site/:id" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application/json","Accept":"application/json"}' onsubmit="event.preventDefault(); executeTryOut('PATCH-api-maintenance-v1-site--id', this);">
+<h3>
+    Request
+    <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-PATCH-api-maintenance-v1-site--id" onclick="tryItOut('PATCH-api-maintenance-v1-site--id');">Try it out ⚡</button>
+    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-PATCH-api-maintenance-v1-site--id" onclick="cancelTryOut('PATCH-api-maintenance-v1-site--id');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-PATCH-api-maintenance-v1-site--id" hidden>Send Request 💥</button>
+</h3>
+<p>
+<small class="badge badge-purple">PATCH</small>
+ <b><code>/api/maintenance/v1/site/:id</b></code>
+</p>
+<h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+<p>
+<b><code>id</code></b>&nbsp;&nbsp;<small>string</small> 
+<input type="text" name="id" data-endpoint="PATCH-api-maintenance-v1-site--id" data-component="url" required hidden>
+<br>
+</p>
+<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+
+<p>
+<b><code>county</code></b>&nbsp;&nbsp;<small>string</small> 
+    <i>optional</i>
+<input type="text" name="county" data-endpoint="PATCH-api-maintenance-v1-site--id" data-component="body" hidden>
+<br>
+County of the test site.</p>
+<p>
+<b><code>state</code></b>&nbsp;&nbsp;<small>string</small> 
+    <i>optional</i>
+<input type="text" name="state" data-endpoint="PATCH-api-maintenance-v1-site--id" data-component="body" hidden>
+<br>
+State of the test site.</p>
+<p>
+<b><code>site_type</code></b>&nbsp;&nbsp;<small>string</small> 
+    <i>optional</i>
+<input type="text" name="site_type" data-endpoint="PATCH-api-maintenance-v1-site--id" data-component="body" hidden>
+<br>
+The type of site. Currently available: School, Government, Hospital.</p>
+<p>
+<b><code>site_name</code></b>&nbsp;&nbsp;<small>string</small> 
+    <i>optional</i>
+<input type="text" name="site_name" data-endpoint="PATCH-api-maintenance-v1-site--id" data-component="body" hidden>
+<br>
+Name of the test site.</p>
+<p>
+<b><code>street</code></b>&nbsp;&nbsp;<small>string</small> 
+    <i>optional</i>
+<input type="text" name="street" data-endpoint="PATCH-api-maintenance-v1-site--id" data-component="body" hidden>
+<br>
+Street address of test site.</p>
+<p>
+<b><code>city</code></b>&nbsp;&nbsp;<small>string</small> 
+    <i>optional</i>
+<input type="text" name="city" data-endpoint="PATCH-api-maintenance-v1-site--id" data-component="body" hidden>
+<br>
+City of the test site.</p>
+<p>
+<b><code>zip</code></b>&nbsp;&nbsp;<small>integer</small> 
+    <i>optional</i>
+<input type="number" name="zip" data-endpoint="PATCH-api-maintenance-v1-site--id" data-component="body" hidden>
+<br>
+ZIP of the test site.</p>
+<p>
+<b><code>clia</code></b>&nbsp;&nbsp;<small>string</small> 
+    <i>optional</i>
+<input type="text" name="clia" data-endpoint="PATCH-api-maintenance-v1-site--id" data-component="body" hidden>
+<br>
+CLIA number that the test site is operating under.</p>
+<p>
+<b><code>contact_name</code></b>&nbsp;&nbsp;<small>string</small> 
+    <i>optional</i>
+<input type="text" name="contact_name" data-endpoint="PATCH-api-maintenance-v1-site--id" data-component="body" hidden>
+<br>
+Contact name for the test site manager.</p>
+<p>
+<b><code>contact_phone</code></b>&nbsp;&nbsp;<small>string</small> 
+    <i>optional</i>
+<input type="text" name="contact_phone" data-endpoint="PATCH-api-maintenance-v1-site--id" data-component="body" hidden>
+<br>
+Contact phone number for the test site manager.</p>
+<p>
+<b><code>contact_email</code></b>&nbsp;&nbsp;<small>string</small> 
+    <i>optional</i>
+<input type="text" name="contact_email" data-endpoint="PATCH-api-maintenance-v1-site--id" data-component="body" hidden>
+<br>
+Contact email address for the test site manager.</p>
+<p>
+<b><code>district</code></b>&nbsp;&nbsp;<small>string</small> 
+    <i>optional</i>
+<input type="text" name="district" data-endpoint="PATCH-api-maintenance-v1-site--id" data-component="body" hidden>
+<br>
+Administrative district that the test site belongs to.</p>
+<p>
+<b><code>latitude</code></b>&nbsp;&nbsp;<small>number</small> 
+    <i>optional</i>
+<input type="number" name="latitude" data-endpoint="PATCH-api-maintenance-v1-site--id" data-component="body" hidden>
+<br>
+Latitude of the test site.</p>
+<p>
+<b><code>longitude</code></b>&nbsp;&nbsp;<small>number</small> 
+    <i>optional</i>
+<input type="number" name="longitude" data-endpoint="PATCH-api-maintenance-v1-site--id" data-component="body" hidden>
+<br>
+Longitude of the test site.</p>
+<p>
+<b><code>archive</code></b>&nbsp;&nbsp;<small>boolean</small> 
+    <i>optional</i>
+    <label data-endpoint="PATCH-api-maintenance-v1-site--id" hidden><input type="radio" name="archive" value="true" data-endpoint="PATCH-api-maintenance-v1-site--id" data-component="body" ><code>true</code></label>
+<label data-endpoint="PATCH-api-maintenance-v1-site--id" hidden><input type="radio" name="archive" value="false" data-endpoint="PATCH-api-maintenance-v1-site--id" data-component="body" ><code>false</code></label>
+<br>
+Archive status of test site (archive=true sites do not display to users).</p>
+</form>
+    </div>
+    <div class="dark-box">
+        
+            <div class="lang-selector">
+                
+                    <a href="#" data-language-name="javascript">javascript</a>
+                
+                    <a href="#" data-language-name="bash">bash</a>
+                
+            </div>
+        
+    </div>
+</div>
+
+<script>
+    $(function () {
+        var languages = ["javascript","bash"];
+        setupLanguages(languages);
+    });
+</script>
+
+</body>
+</html>

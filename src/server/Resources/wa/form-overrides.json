@@ -1,0 +1,102 @@
+{
+  "covid_test": {
+    "patient_dl": {
+      "display": false
+    },
+    "patient_sex": {
+      "label": "Gender"
+    },
+    "ctrl_first": {
+      "display": false
+    },
+    "patient_previous_test": {
+      "display": false
+    },
+    "patient_previous_test_datetime": {
+      "display": false
+    },
+    "patient_hcw": {
+      "display": false
+    },
+    "ctrl_symp": {
+      "display": false
+    },
+    "patient_symptom_onset": {
+      "display": false
+    },
+    "qual_temperature": {
+      "display": false
+    },
+    "qual_fever": {
+      "display": false
+    },
+    "qual_chills": {
+      "display": false
+    },
+    "qual_cough": {
+      "display": false
+    },
+    "qual_short_breath": {
+      "display": false
+    },
+    "qual_diff_breath": {
+      "display": false
+    },
+    "qual_fatigue": {
+      "display": false
+    },
+    "qual_body_ache": {
+      "display": false
+    },
+    "qual_headache": {
+      "display": false
+    },
+    "qual_loss_taste": {
+      "display": false
+    },
+    "qual_loss_smell": {
+      "display": false
+    },
+    "qual_sore_throat": {
+      "display": false
+    },
+    "qual_nasal_congestion": {
+      "display": false
+    },
+    "qual_nose": {
+      "display": false
+    },
+    "qual_nausea": {
+      "display": false
+    },
+    "qual_vomit": {
+      "display": false
+    },
+    "qual_diarrhea": {
+      "display": false
+    },
+    "patient_pregnant": {
+      "display": false
+    },
+    "page3": {
+      "display": false
+    }
+  },
+  "selectOptions": {
+    "patient_site_assigned": "SELECT id as value, CONCAT(reason, ' - ', district, ' District') as label,street,city,state,zip,site_type from mod_cvd_sites WHERE archive != 1",
+    "patient_sex": [
+      {
+        "value": "male", "label": "Male"
+      },
+      {
+        "value": "female", "label": "Female"
+      },
+      {
+        "value": "other", "label": "Other"
+      },
+      {
+        "value": "unk", "label": "Unknown"
+      }
+    ]
+  }
+}

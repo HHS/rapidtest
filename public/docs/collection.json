@@ -1,0 +1,324 @@
+{
+    "variable": [
+        {
+            "id": "baseUrl",
+            "key": "baseUrl",
+            "type": "string",
+            "name": "string",
+            "value": "app.warapidtest.org"
+        }
+    ],
+    "info": {
+        "name": "STRAC Rapid Testing App Documentation",
+        "description": "",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "_postman_id": "c9423ed4-7cf1-45be-94c1-1c68166f9e56"
+    },
+    "item": [
+        {
+            "name": "Site maintenance",
+            "description": "",
+            "item": [
+                {
+                    "name": "List sites.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "{{baseUrl}}",
+                            "path": "api/maintenance/v1/sites",
+                            "query": [
+                                {
+                                    "key": "filter",
+                                    "value": "STR%25C",
+                                    "description": "Filter by keyword in site_name.",
+                                    "disabled": false
+                                }
+                            ],
+                            "raw": "https://{{baseUrl}}/api/maintenance/v1/sites?filter=STR%25C"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": null,
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Add site.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "{{baseUrl}}",
+                            "path": "api/maintenance/v1/site",
+                            "query": [],
+                            "raw": "https://{{baseUrl}}/api/maintenance/v1/site"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"county\": \"Bexar\",\n    \"state\": \"TX\",\n    \"site_type\": \"School\",\n    \"site_name\": \"STRAC\",\n    \"street\": \"7500 US-90 #1\",\n    \"city\": \"San Antonio\",\n    \"zip\": 78227,\n    \"clia\": \"45D2193699\",\n    \"contact_name\": \"Fake Person\",\n    \"contact_phone\": \"999-999-9999\",\n    \"contact_email\": \"fake.person@strac.org\",\n    \"district\": \"Texas Division of Emergency Management\",\n    \"latitude\": \"29.400960\",\n    \"longitude\": \"-98.638720\"\n}"
+                        },
+                        "description": null,
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get a site record.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "{{baseUrl}}",
+                            "path": "api/maintenance/v1/site/:id",
+                            "query": [],
+                            "raw": "https://{{baseUrl}}/api/maintenance/v1/site/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "porro",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": null,
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update site.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "{{baseUrl}}",
+                            "path": "api/maintenance/v1/site/:id",
+                            "query": [],
+                            "raw": "https://{{baseUrl}}/api/maintenance/v1/site/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "ut",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"county\": \"Bexar\",\n    \"state\": \"TX\",\n    \"site_type\": \"School\",\n    \"site_name\": \"STRAC\",\n    \"street\": \"7500 US-90 #1\",\n    \"city\": \"San Antonio\",\n    \"zip\": 78227,\n    \"clia\": \"45D2193699\",\n    \"contact_name\": \"Fake Person\",\n    \"contact_phone\": \"999-999-9999\",\n    \"contact_email\": \"fake.person@strac.org\",\n    \"district\": \"Texas Division of Emergency Management\",\n    \"latitude\": 29.40096,\n    \"longitude\": -98.63872,\n    \"archive\": false\n}"
+                        },
+                        "description": null,
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Proctor maintenance",
+            "description": "",
+            "item": [
+                {
+                    "name": "List proctors.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "{{baseUrl}}",
+                            "path": "api/maintenance/v1/proctors",
+                            "query": [
+                                {
+                                    "key": "filter",
+                                    "value": "%40strac.org",
+                                    "description": "Filter by keyword in email_address.",
+                                    "disabled": false
+                                }
+                            ],
+                            "raw": "https://{{baseUrl}}/api/maintenance/v1/proctors?filter=%40strac.org"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": null,
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Add proctor.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "{{baseUrl}}",
+                            "path": "api/maintenance/v1/proctor",
+                            "query": [],
+                            "raw": "https://{{baseUrl}}/api/maintenance/v1/proctor"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"first_name\": \"Fake\",\n    \"last_name\": \"Person\",\n    \"email_address\": \"fake.person@strac.org\",\n    \"phone_number_office\": \"999-999-9999\"\n}"
+                        },
+                        "description": null,
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get a proctor record.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "{{baseUrl}}",
+                            "path": "api/maintenance/v1/proctor/:id",
+                            "query": [],
+                            "raw": "https://{{baseUrl}}/api/maintenance/v1/proctor/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "exercitationem",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": null,
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update proctor account.",
+                    "request": {
+                        "url": {
+                            "protocol": "https",
+                            "host": "{{baseUrl}}",
+                            "path": "api/maintenance/v1/proctor/:id",
+                            "query": [],
+                            "raw": "https://{{baseUrl}}/api/maintenance/v1/proctor/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "cupiditate",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"first_name\": \"Fake\",\n    \"last_name\": \"Person\",\n    \"phone_number_office\": \"999-999-9999\",\n    \"archive\": false,\n    \"resend_email\": true,\n    \"password\": \"maiores\"\n}"
+                        },
+                        "description": null,
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        }
+    ],
+    "auth": {
+        "type": "noauth"
+    }
+}

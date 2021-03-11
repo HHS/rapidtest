@@ -1,0 +1,17 @@
+.scanner-bg {
+    background: #000;
+}
+
+.scandit-placeholder {
+    background: #000;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.scandit.scandit-container,.scandit .scandit-video.mirrored,.scandit-placeholder,.scanner-bg {
+    border-radius: 0 0 0.75rem 0.75rem;
+}

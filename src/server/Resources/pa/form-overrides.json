@@ -1,0 +1,20 @@
+{
+  "covid_test": {
+    "patient_pregnant": {
+      "display": false
+    }
+  },
+  "selectOptions": {
+    "patient_sex": [
+      {
+        "value": "male", "label": "Male"
+      },
+      {
+        "value": "female", "label": "Female"
+      },
+      {
+        "value": "unk", "label": "Other"
+      }
+    ]
+  }
+}
