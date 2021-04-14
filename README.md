@@ -6,7 +6,7 @@
 * Edit `src/server/config.js`.
 * Make a directory in `src/server/Resources` to place your EULA/form overrides/logo into.
 * Add your Firebase service account private key file in `src/server/`.
-* Add SSL server keys into `ssl/`. `ssl/cert.pem` and `ssl/key.pem`.
+* Add SSL server keys into `ssl/`. `ssl/cert.pem` and `ssl/key.pem`. Replace `YOURPASSPHRASE` in `src/server/index.js`.
 * Modify `webpack.prod.js` and `Dockerfile`. Replace `YOURBUGSNAGAPIKEY` with your Bugsnag API key.
 
 
@@ -22,10 +22,6 @@ npm run dev
 ```
 
 Will be running on https://localhost:3000/
-
-## Live Demo
-The .gitlab-ci.yml and Dockerfile files are used to deploy the master branch and the develop branch to portainer.
-The master branch is here https://10.1.3.250:3105 and the develop branch is here https://10.1.3.250:3106
 
 ## Adding Fields to Form
 
@@ -101,20 +97,20 @@ https://github.com/PDF417/pdf417-android/blob/master/DriversLicenseKeys.md#usdls
 ## Running in production
 
 ```
-docker pull 10.1.3.250:5000/test-kit-scanner:master ; 
+docker pull your_docker_registry:5000/test-kit-scanner:master ; 
 docker run -d \
   -p 443:8080 \
   --name test-kit-scanner \
   --restart unless-stopped \
-  10.1.3.250:5000/test-kit-scanner:master
+  your_docker_registry:5000/test-kit-scanner:master
 ```
 
-###To Update
+### To Update
 
 ```
 docker kill test-kit-scanner ; 
 docker rm test-kit-scanner ;
-docker pull 10.1.3.250:5000/test-kit-scanner:master ; 
+docker pull your_docker_registry:5000/test-kit-scanner:master ; 
 docker run -d ...
 ```
 
@@ -127,7 +123,7 @@ docker run -d \
   --env RECAPTCHA_ENABLED=false \
   --env RECAPTCHA_VERIFY=false \
   --env RECAPTCHA_MIN_SCORE=0.2 \
-  10.1.3.250:5000/test-kit-scanner:master
+  your_docker_registry:5000/test-kit-scanner:master
 ```
 
 ### Access logs

@@ -786,7 +786,7 @@ app.patch('/api/maintenance/v1/proctor/:id', (req, res, next) => {
 let options = {
   key: fs.readFileSync('./ssl/key.pem'),
   cert: fs.readFileSync('./ssl/cert.pem'),
-  passphrase: 'teknic54',
+  passphrase: 'YOURPASSPHRASE',
   rejectUnauthorized: false
 };
 

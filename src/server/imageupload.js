@@ -50,8 +50,8 @@ function upload (file, callback) {
     let formData = new FormData();
     formData.append("files[]", fs.createReadStream(path));
     formData.submit({
-      host: '10.1.3.250',
-      path: '/ltowb/scripts/index.php?record_id=' + imageId,
+      host: 'image_upload_server',
+      path: '/index.php?record_id=' + imageId,
       port: '3202',
       protocol: 'http:'
     }, function (err, res) {
